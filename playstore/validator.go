@@ -7,6 +7,7 @@ import (
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
+	"golang.org/x/oauth2/jwt"
 	androidpublisher "google.golang.org/api/androidpublisher/v2"
 )
 
@@ -45,6 +46,19 @@ func New(jsonKey []byte) (Client, error) {
 	conf, err := google.JWTConfigFromJSON(jsonKey, scope)
 
 	return Client{conf.Client(ctx)}, err
+}
+
+func NewWithParams(key, email string) Client {
+	ctx := context.WithValue(oauth2.NoContext, oauth2.HTTPClient, &http.Client{
+		Timeout: timeout,
+	})
+	conf := &jwt.Config{
+		Email:      email,
+		PrivateKey: []byte(key),
+		Scopes:     []string{scope},
+		TokenURL:   google.JWTTokenURL,
+	}
+	return Client{conf.Client(ctx)}
 }
 
 // VerifySubscription Verifies subscription status
