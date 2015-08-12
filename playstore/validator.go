@@ -61,12 +61,23 @@ func NewWithParams(key, email string) Client {
 	return Client{conf.Client(ctx)}
 }
 
-// VerifySubscription Verifies subscription status
-func (c *Client) VerifySubscription(
-	packageName string,
-	subscriptionID string,
-	token string,
-) (*androidpublisher.SubscriptionPurchase, error) {
+// Verify retrieves product and subscription status from GooglePlay API
+func (c *Client) Verify(packageName, productID, token string) (*IABResponse, error) {
+	resp, err := c.VerifyProduct(packageName, productID, token)
+	if err == nil {
+		return resp, nil
+	}
+	resp.SubscriptionPurchase, err = c.verifySubscription(packageName, productID, token)
+	return resp, err
+}
+
+// VerifySubscription retrieves product status from GooglePlay API
+func (c *Client) VerifySubscription(packageName, productID, token string) (*IABResponse, error) {
+	result, err := c.verifySubscription(packageName, productID, token)
+	return &IABResponse{SubscriptionPurchase: result}, err
+}
+
+func (c *Client) verifySubscription(packageName, subscriptionID, token string) (*androidpublisher.SubscriptionPurchase, error) {
 	service, err := androidpublisher.New(c.httpClient)
 	if err != nil {
 		return nil, err
@@ -78,12 +89,13 @@ func (c *Client) VerifySubscription(
 	return result, err
 }
 
-// VerifyProduct Verifies product status
-func (c *Client) VerifyProduct(
-	packageName string,
-	productID string,
-	token string,
-) (*androidpublisher.ProductPurchase, error) {
+// VerifyProduct retrieves product status from GooglePlay API
+func (c *Client) VerifyProduct(packageName, productID, token string) (*IABResponse, error) {
+	result, err := c.verifyProduct(packageName, productID, token)
+	return &IABResponse{ProductPurchase: result}, err
+}
+
+func (c *Client) verifyProduct(packageName, productID, token string) (*androidpublisher.ProductPurchase, error) {
 	service, err := androidpublisher.New(c.httpClient)
 	if err != nil {
 		return nil, err
