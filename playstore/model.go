@@ -61,6 +61,6 @@ func (r IABResponse) IsExpired() bool {
 		return false
 	default:
 		now := time.Now().UnixNano() / int64(time.Millisecond)
-		return r.SubscriptionPurchase.ExpiryTimeMillis > now
+		return r.SubscriptionPurchase.ExpiryTimeMillis < now
 	}
 }

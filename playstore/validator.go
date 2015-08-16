@@ -106,3 +106,14 @@ func (c *Client) verifyProduct(packageName, productID, token string) (*androidpu
 
 	return result, err
 }
+
+// CancelSubscription cancels recurring payment of given subscription
+func (c *Client) CancelSubscription(packageName, subscriptionID, token string) error {
+	service, err := androidpublisher.New(c.httpClient)
+	if err != nil {
+		return err
+	}
+
+	ps := androidpublisher.NewPurchasesSubscriptionsService(service)
+	return ps.Cancel(packageName, subscriptionID, token).Do()
+}
