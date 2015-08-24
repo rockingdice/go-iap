@@ -53,7 +53,7 @@ func (r *Receipt) IsValidReceipt() bool {
 }
 
 func (r *Receipt) IsAutoRenewable() bool {
-	return r.InApps.Has()
+	return r.InApps.IsAutoRenewable()
 }
 
 func (r *Receipt) HasError() error {
@@ -65,7 +65,7 @@ func (r *Receipt) HasExpired() bool {
 }
 
 func (r *Receipt) GetTransactionIDsByProduct(product string) []int64 {
-	return r.InApps.TransactionIDsByProduct(r.BundleID + "." + product)
+	return r.InApps.TransactionIDsByProduct(product)
 }
 
 func (r *Receipt) GetByTransactionID(id int64) *ReceiptInApp {
@@ -89,8 +89,13 @@ type ReceiptInApp struct {
 
 type ReceiptInApps []*ReceiptInApp
 
-func (r ReceiptInApps) Has() bool {
-	return len(r) > 0
+func (r ReceiptInApps) IsAutoRenewable() bool {
+	for _, v := range r {
+		if v.ExpiresDate.IsZero() {
+			return false
+		}
+	}
+	return true
 }
 
 func (r ReceiptInApps) ByTransactionID(id int64) *ReceiptInApp {
@@ -122,4 +127,19 @@ func (r ReceiptInApps) TransactionIDsByProduct(productID string) []int64 {
 		matched = append(matched, v.TransactionID)
 	}
 	return matched
+}
+
+// for auto-renewable
+func (r ReceiptInApps) LastExpiresByProductID(productID string) *ReceiptInApp {
+	var latest *ReceiptInApp
+	for _, v := range r {
+		switch {
+		case v.ProductID != productID:
+			continue
+		case latest != nil && latest.ExpiresDate.Before(v.ExpiresDate):
+			continue
+		}
+		latest = v
+	}
+	return latest
 }
