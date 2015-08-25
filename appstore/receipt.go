@@ -136,7 +136,7 @@ func (r ReceiptInApps) LastExpiresByProductID(productID string) *ReceiptInApp {
 		switch {
 		case v.ProductID != productID:
 			continue
-		case latest != nil && latest.ExpiresDate.Before(v.ExpiresDate):
+		case latest != nil && latest.ExpiresDate.After(v.ExpiresDate):
 			continue
 		}
 		latest = v
