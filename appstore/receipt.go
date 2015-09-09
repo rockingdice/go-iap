@@ -64,6 +64,10 @@ func (r *Receipt) HasExpired() bool {
 	return r.Status == 21006
 }
 
+func (r *Receipt) GetTransactionIDs() []int64 {
+	return r.InApps.TransactionIDs()
+}
+
 func (r *Receipt) GetTransactionIDsByProduct(product string) []int64 {
 	return r.InApps.TransactionIDsByProduct(product)
 }
@@ -116,6 +120,14 @@ func (r ReceiptInApps) ByProduct(productID string) ReceiptInApps {
 		matched = append(matched, v)
 	}
 	return matched
+}
+
+func (r ReceiptInApps) TransactionIDs() []int64 {
+	var ids []int64
+	for _, v := range r {
+		ids = append(ids, v.TransactionID)
+	}
+	return ids
 }
 
 func (r ReceiptInApps) TransactionIDsByProduct(productID string) []int64 {
