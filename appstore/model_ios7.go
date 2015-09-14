@@ -13,6 +13,10 @@ type IAPResponseIOS7 struct {
 	LatestReceipt     string      `json:"latest_receipt"`
 }
 
+func NewIAPResponseIOS7(rc string) *IAPResponseIOS7 {
+	return &IAPResponseIOS7{rawReceipt: rc}
+}
+
 func (r *IAPResponseIOS7) ToReceipt() *Receipt {
 	rr := r.Receipt
 	receipt := &Receipt{

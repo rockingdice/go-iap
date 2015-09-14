@@ -11,6 +11,10 @@ type IAPResponseIOS6 struct {
 	LatestReceipt     string      `json:"latest_receipt"`
 }
 
+func NewIAPResponseIOS6(rc string) *IAPResponseIOS6 {
+	return &IAPResponseIOS6{rawReceipt: rc}
+}
+
 func (r *IAPResponseIOS6) ToIOS7() *IAPResponseIOS7 {
 	ios7 := &IAPResponseIOS7{
 		responseVersion: verIOS6,
