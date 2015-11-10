@@ -113,10 +113,7 @@ func (c *Client) Verify(req IAPRequest) (*Receipt, error) {
 		rawReceipt: req.ReceiptData,
 	}
 	err := json.NewDecoder(strings.NewReader(body)).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-	if result.Environment != "" {
+	if err == nil && result.Environment != "" {
 		return result.ToReceipt(), nil
 	}
 

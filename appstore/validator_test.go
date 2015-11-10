@@ -134,14 +134,14 @@ func TestNewWithConfigTimeout(t *testing.T) {
 func TestVerify(t *testing.T) {
 	client := New()
 
-	expected := IAPResponse{
+	expected := Receipt{
 		Status: 21002,
 	}
 	req := IAPRequest{
 		ReceiptData: "dummy data",
 	}
 	actual, _ := client.Verify(req)
-	if !reflect.DeepEqual(actual, expected) {
+	if !reflect.DeepEqual(actual.Status, expected.Status) {
 		t.Errorf("got %v\nwant %v", actual, expected)
 	}
 }
