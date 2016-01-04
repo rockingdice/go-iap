@@ -8469,4 +8469,3 @@ var testReceiptString = `{
   ],
   "latest_receipt": "<latest receipt string>"
 }`
- 

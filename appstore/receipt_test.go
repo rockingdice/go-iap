@@ -41,7 +41,7 @@ func TestLastExpiresByProductID(t *testing.T) {
 	assert.Equal("com.example.app.subscription_1.v2", inApp.ProductID)
 	assert.EqualValues(1000000183882899, inApp.TransactionID)
 	assert.Equal(expectedExpire.Unix(), inApp.ExpiresDate.Unix())
-	
+
 	inApp = rc.LatestReceiptInfo.LastExpiresByProductID("com.example.app.subscription_1.v2")
 	expectedExpire, _ = time.Parse(time.RFC3339, "2015-12-07T23:49:14Z")
 	assert.Equal("com.example.app.subscription_1.v2", inApp.ProductID)
