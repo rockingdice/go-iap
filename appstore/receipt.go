@@ -76,6 +76,20 @@ func (r *Receipt) GetByTransactionID(id int64) *ReceiptInApp {
 	return r.InApps.ByTransactionID(id)
 }
 
+func (r *Receipt) GetLastExpiresByProductID(productID string) *ReceiptInApp {
+	inAppLatest := r.LatestReceiptInfo.LastExpiresByProductIDForLatest(productID)
+	inApp := r.InApps.LastExpiresByProductID(productID)
+	switch {
+	case inApp == nil:
+		return inAppLatest
+	case inAppLatest == nil:
+		return inApp
+	case inApp.ExpiresDate.After(inAppLatest.ExpiresDate):
+		return inApp
+	}
+	return inAppLatest
+}
+
 type ReceiptInApp struct {
 	Quantity                  int64
 	ProductID                 string
@@ -154,4 +168,15 @@ func (r ReceiptInApps) LastExpiresByProductID(productID string) *ReceiptInApp {
 		latest = v
 	}
 	return latest
+}
+
+// for LatestReceiptInfo
+func (r ReceiptInApps) LastExpiresByProductIDForLatest(productID string) *ReceiptInApp {
+	for i := len(r)-1; i >= 0; i-- {
+		v := r[i]
+		if v.ProductID == productID {
+			return v
+		}
+	}
+	return nil
 }
