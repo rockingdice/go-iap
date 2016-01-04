@@ -1,11 +1,19 @@
+sudo: false
 language: go
 go:
-- 1.5
+  - 1.5
+  - 1.4
+  - tip
+
+matrix:
+  allow_failures:
+    - go: tip
+
 before_install:
   sudo pip install codecov
 install:
-- make setup
+  - make setup
 script:
-- make cover
+  - make cover
 after_success:
   codecov
