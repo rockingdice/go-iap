@@ -1,4 +1,4 @@
-go-iap (forked from [dogenzaka/go-iap](https://github.com/dogenzaka/go-iap))
+go-iap
 ======
 
 [![Build Status](https://travis-ci.org/evalphobia/go-iap.svg?branch=master)](https://travis-ci.org/evalphobia/go-iap)
@@ -11,7 +11,9 @@ Current API Documents:
 * AppStore: [![GoDoc](https://godoc.org/github.com/evalphobia/go-iap/appstore?status.svg)](https://godoc.org/github.com/evalphobia/go-iap/appstore)
 * GooglePlay: [![GoDoc](https://godoc.org/github.com/evalphobia/go-iap/playstore?status.svg)](https://godoc.org/github.com/evalphobia/go-iap/playstore)
 
-# Differences
+# Differences from original
+
+This repository is forked from [dogenzaka/go-iap](https://github.com/dogenzaka/go-iap)
 
 - supports iOS6 Style receipt
 - some api for iap receipts

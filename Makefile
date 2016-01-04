@@ -4,7 +4,7 @@
 all: setup cover
 
 setup:
-		go get golang.org/x/tools/cmd/cover
+		go get golang.org/x/tools/cmd/cover github.com/stretchr/testify/assert
 		go get ./...
 
 test:
