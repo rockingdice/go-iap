@@ -85,6 +85,56 @@ func (r *Receipt) GetTransactionIDsByProduct(product string) []int64 {
 	return r.InApps.TransactionIDsByProduct(product)
 }
 
+// GetTransactionIDsWithoutExpired returns all of transaction_id except expired
+func (r *Receipt) GetTransactionIDsWithoutExpired() []int64 {
+	checked := make(map[int64]bool)
+	now := time.Now()
+	var matched []int64
+	matchedIDs := func(rc ReceiptInApps) {
+		for _, v := range rc {
+			if checked[v.TransactionID] {
+				continue
+			}
+			checked[v.TransactionID] = true
+
+			switch {
+			case !v.ExpiresDate.IsZero() && v.ExpiresDate.Before(now):
+				continue
+			}
+			matched = append(matched, v.TransactionID)
+		}
+	}
+	matchedIDs(r.InApps)
+	matchedIDs(r.LatestReceiptInfo)
+	return matched
+}
+
+// GetTransactionIDsByProductWithoutExpired returns all of transaction_id filtered by `product_id` except expired
+func (r *Receipt) GetTransactionIDsByProductWithoutExpired(product string) []int64 {
+	checked := make(map[int64]bool)
+	now := time.Now()
+	var matched []int64
+	matchedIDs := func(rc ReceiptInApps) {
+		for _, v := range rc {
+			if checked[v.TransactionID] {
+				continue
+			}
+			checked[v.TransactionID] = true
+
+			switch {
+			case v.ProductID != product:
+				continue
+			case !v.ExpiresDate.IsZero() && v.ExpiresDate.Before(now):
+				continue
+			}
+			matched = append(matched, v.TransactionID)
+		}
+	}
+	matchedIDs(r.InApps)
+	matchedIDs(r.LatestReceiptInfo)
+	return matched
+}
+
 // GetByTransactionID returns receipt data by `transaction_id`
 func (r *Receipt) GetByTransactionID(id int64) *ReceiptInApp {
 	return r.InApps.ByTransactionID(id)

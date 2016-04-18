@@ -24,19 +24,6 @@ var testReceiptString = `{
     "in_app": [
       {
         "quantity": "1",
-        "product_id": "com.example.app.consumable_10",
-        "transaction_id": "1000000181765148",
-        "original_transaction_id": "1000000181765148",
-        "purchase_date": "2015-11-25 03:50:43 Etc/GMT",
-        "purchase_date_ms": "1448423443000",
-        "purchase_date_pst": "2015-11-24 19:50:43 America/Los_Angeles",
-        "original_purchase_date": "2015-11-25 03:50:43 Etc/GMT",
-        "original_purchase_date_ms": "1448423443000",
-        "original_purchase_date_pst": "2015-11-24 19:50:43 America/Los_Angeles",
-        "is_trial_period": "false"
-      },
-      {
-        "quantity": "1",
         "product_id": "com.example.app.subscription_1",
         "transaction_id": "1000000068359169",
         "original_transaction_id": "1000000068358624",
@@ -8200,19 +8187,6 @@ var testReceiptString = `{
     },
     {
       "quantity": "1",
-      "product_id": "com.example.app.consumable_10",
-      "transaction_id": "1000000181765148",
-      "original_transaction_id": "1000000181765148",
-      "purchase_date": "2015-11-25 03:50:43 Etc/GMT",
-      "purchase_date_ms": "1448423443000",
-      "purchase_date_pst": "2015-11-24 19:50:43 America/Los_Angeles",
-      "original_purchase_date": "2015-11-25 03:50:43 Etc/GMT",
-      "original_purchase_date_ms": "1448423443000",
-      "original_purchase_date_pst": "2015-11-24 19:50:43 America/Los_Angeles",
-      "is_trial_period": "false"
-    },
-    {
-      "quantity": "1",
       "product_id": "com.example.app.subscription_12.v2",
       "transaction_id": "1000000181767818",
       "original_transaction_id": "1000000112476475",
@@ -8464,6 +8438,163 @@ var testReceiptString = `{
       "expires_date_ms": "1449532562000",
       "expires_date_pst": "2015-12-07 15:56:02 America/Los_Angeles",
       "web_order_line_item_id": "1000000031132976",
+      "is_trial_period": "false"
+    },
+    {
+      "quantity": "1",
+      "product_id": "com.example.app.subscription2_.v2",
+      "transaction_id": "1000000183886962",
+      "original_transaction_id": "1000000112590073",
+      "purchase_date": "2010-01-01 10:00:00 Etc/GMT",
+      "purchase_date_ms": "1262340000000",
+      "purchase_date_pst": "2010-01-01 02:00:00 America/Los_Angeles",
+      "original_purchase_date": "2010-01-01 10:00:00 Etc/GMT",
+      "original_purchase_date_ms": "1262340000000",
+      "original_purchase_date_pst": "2010-01-01 02:00:00 America/Los_Angeles",
+      "expires_date": "2099-01-01 10:00:00 Etc/GMT",
+      "expires_date_ms": "4070912400000",
+      "expires_date_pst": "2099-01-01 10:00:00 America/Los_Angeles",
+      "web_order_line_item_id": "1000000031132977",
+      "is_trial_period": "false"
+    },
+    {
+      "quantity": "1",
+      "product_id": "com.example.app.subscription_long",
+      "transaction_id": "1000000183886963",
+      "original_transaction_id": "1000000112590073",
+      "purchase_date": "2010-01-01 10:00:00 Etc/GMT",
+      "purchase_date_ms": "1262340000000",
+      "purchase_date_pst": "2010-01-01 02:00:00 America/Los_Angeles",
+      "original_purchase_date": "2010-01-01 10:00:00 Etc/GMT",
+      "original_purchase_date_ms": "1262340000000",
+      "original_purchase_date_pst": "2010-01-01 02:00:00 America/Los_Angeles",
+      "expires_date": "2099-01-01 10:00:00 Etc/GMT",
+      "expires_date_ms": "4070912400000",
+      "expires_date_pst": "2099-01-01 10:00:00 America/Los_Angeles",
+      "web_order_line_item_id": "1000000031132978",
+      "is_trial_period": "false"
+    }
+  ],
+  "latest_receipt": "<latest receipt string>"
+}`
+
+var testReceiptString2 = `{
+  "status": 21006,
+  "environment": "Production",
+  "receipt": {
+    "receipt_type": "Production",
+    "adam_id": 0,
+    "app_item_id": 0,
+    "bundle_id": "com.example.app",
+    "application_version": "9.0.0.99",
+    "download_id": 0,
+    "version_external_identifier": 0,
+    "receipt_creation_date": "2015-12-07 23:19:18 Etc/GMT",
+    "receipt_creation_date_ms": "1449530358000",
+    "receipt_creation_date_pst": "2015-12-07 15:19:18 America/Los_Angeles",
+    "request_date": "2015-12-08 04:58:43 Etc/GMT",
+    "request_date_ms": "1449550723677",
+    "request_date_pst": "2015-12-07 20:58:43 America/Los_Angeles",
+    "original_purchase_date": "2013-08-01 07:00:00 Etc/GMT",
+    "original_purchase_date_ms": "1375340400000",
+    "original_purchase_date_pst": "2013-08-01 00:00:00 America/Los_Angeles",
+    "original_application_version": "1.0",
+    "in_app": [
+      {
+        "quantity": "1",
+        "product_id": "com.example.app.subscription_1",
+        "transaction_id": "1000000068359170",
+        "original_transaction_id": "1000000068358624",
+        "purchase_date": "2013-03-18 06:17:47 Etc/GMT",
+        "purchase_date_ms": "1363587467000",
+        "purchase_date_pst": "2013-03-17 23:17:47 America/Los_Angeles",
+        "original_purchase_date": "2013-03-18 06:15:52 Etc/GMT",
+        "original_purchase_date_ms": "1363587352000",
+        "original_purchase_date_pst": "2013-03-17 23:15:52 America/Los_Angeles",
+        "expires_date": "2013-03-18 06:22:47 Etc/GMT",
+        "expires_date_ms": "1363587767000",
+        "expires_date_pst": "2013-03-17 23:22:47 America/Los_Angeles",
+        "web_order_line_item_id": "1000000026752742",
+        "is_trial_period": "false"
+      }
+    ]
+  },
+  "latest_receipt_info": [
+    {
+      "quantity": "1",
+      "product_id": "com.example.app.subscription_1",
+      "transaction_id": "1000000068358624",
+      "original_transaction_id": "1000000068358624",
+      "purchase_date": "2013-03-18 06:12:47 Etc/GMT",
+      "purchase_date_ms": "1363587167000",
+      "purchase_date_pst": "2013-03-17 23:12:47 America/Los_Angeles",
+      "original_purchase_date": "2013-03-18 06:12:47 Etc/GMT",
+      "original_purchase_date_ms": "1363587167000",
+      "original_purchase_date_pst": "2013-03-17 23:12:47 America/Los_Angeles",
+      "expires_date": "2013-03-18 06:17:47 Etc/GMT",
+      "expires_date_ms": "1363587467000",
+      "expires_date_pst": "2013-03-17 23:17:47 America/Los_Angeles",
+      "web_order_line_item_id": "1000000026752743",
+      "is_trial_period": "false"
+    }
+  ],
+  "latest_receipt": "<latest receipt string>"
+}`
+
+// consumable
+var testReceiptString3 = `{
+  "status": 21002,
+  "environment": "Production",
+  "receipt": {
+    "receipt_type": "Production",
+    "adam_id": 0,
+    "app_item_id": 0,
+    "bundle_id": "com.example.app",
+    "application_version": "9.0.0.99",
+    "download_id": 0,
+    "version_external_identifier": 0,
+    "receipt_creation_date": "2015-12-07 23:19:18 Etc/GMT",
+    "receipt_creation_date_ms": "1449530358000",
+    "receipt_creation_date_pst": "2015-12-07 15:19:18 America/Los_Angeles",
+    "request_date": "2015-12-08 04:58:43 Etc/GMT",
+    "request_date_ms": "1449550723677",
+    "request_date_pst": "2015-12-07 20:58:43 America/Los_Angeles",
+    "original_purchase_date": "2013-08-01 07:00:00 Etc/GMT",
+    "original_purchase_date_ms": "1375340400000",
+    "original_purchase_date_pst": "2013-08-01 00:00:00 America/Los_Angeles",
+    "original_application_version": "1.0",
+    "in_app": [
+      {
+        "quantity": "1",
+        "product_id": "com.example.app.consumable_10",
+        "transaction_id": "1000000181765148",
+        "original_transaction_id": "1000000181765148",
+        "purchase_date": "2015-11-25 03:50:43 Etc/GMT",
+        "purchase_date_ms": "1448423443000",
+        "purchase_date_pst": "2015-11-24 19:50:43 America/Los_Angeles",
+        "original_purchase_date": "2015-11-25 03:50:43 Etc/GMT",
+        "original_purchase_date_ms": "1448423443000",
+        "original_purchase_date_pst": "2015-11-24 19:50:43 America/Los_Angeles",
+        "is_trial_period": "false"
+      }
+    ]
+  },
+  "latest_receipt_info": [
+    {
+      "quantity": "1",
+      "product_id": "com.example.app.subscription_1",
+      "transaction_id": "1000000068358624",
+      "original_transaction_id": "1000000068358624",
+      "purchase_date": "2013-03-18 06:12:47 Etc/GMT",
+      "purchase_date_ms": "1363587167000",
+      "purchase_date_pst": "2013-03-17 23:12:47 America/Los_Angeles",
+      "original_purchase_date": "2013-03-18 06:12:47 Etc/GMT",
+      "original_purchase_date_ms": "1363587167000",
+      "original_purchase_date_pst": "2013-03-17 23:12:47 America/Los_Angeles",
+      "expires_date": "2013-03-18 06:17:47 Etc/GMT",
+      "expires_date_ms": "1363587467000",
+      "expires_date_pst": "2013-03-17 23:17:47 America/Los_Angeles",
+      "web_order_line_item_id": "1000000026752743",
       "is_trial_period": "false"
     }
   ],
