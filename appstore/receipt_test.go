@@ -185,12 +185,12 @@ func TestGetTransactionIDsByProduct(t *testing.T) {
 		expectedLen int
 		expected1st int
 	}{
-		{testReceipt1, "com.example.app.subscription_1.v2", 43, 1000000117928271},
-		{testReceipt1, "com.example.app.subscription_3.v2", 90, 1000000116297757},
-		{testReceipt1, "com.example.app.subscription_6.v2", 36, 1000000112476475},
-		{testReceipt1, "com.example.app.subscription_12.v2", 18, 1000000112589395},
+		{testReceipt1, "com.example.app.subscription_1.v2", 44, 1000000183885918},
+		{testReceipt1, "com.example.app.subscription_3.v2", 90, 1000000146311029},
+		{testReceipt1, "com.example.app.subscription_6.v2", 36, 1000000150322509},
+		{testReceipt1, "com.example.app.subscription_12.v2", 18, 1000000181778917},
 		{testReceipt1, "invalid_id", 0, 0},
-		{testReceipt2, "com.example.app.subscription_1", 1, 1000000068359170},
+		{testReceipt2, "com.example.app.subscription_1", 2, 1000000068358624},
 		{testReceipt3, "com.example.app.consumable_10", 1, 1000000181765148},
 	}
 
