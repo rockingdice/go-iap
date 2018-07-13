@@ -1,20 +1,27 @@
 package appstore
 
-import "strconv"
+import (
+	"strconv"
+)
 
 const verIOS6 = 6
 
 // The IAPResponse type has the response properties
 type IAPResponseIOS6 struct {
-	rawReceipt        string      `json:"-"`
-	Status            int         `json:"status"`
-	Receipt           ReceiptIOS6 `json:"receipt"`
-	LatestReceiptInfo ReceiptIOS6 `json:"latest_receipt_info"`
-	LatestReceipt     string      `json:"latest_receipt"`
+	rawReceipt               string      `json:"-"`
+	Status                   int         `json:"status"`
+	Receipt                  ReceiptIOS6 `json:"receipt"`
+	LatestReceiptInfo        ReceiptIOS6 `json:"latest_receipt_info"`
+	LatestExpiredReceiptInfo ReceiptIOS6 `json:"latest_expired_receipt_info"`
+	LatestReceipt            string      `json:"latest_receipt"`
 
 	// pending_renewal_info in iOS 6 style receipt.
 	AutoRenewStatus    int    `json:"auto_renew_status"`
 	AutoRenewProductID string `json:"auto_renew_product_id"`
+	ExpirationIntent   string `json:"expiration_intent"`
+	RetryFlag          string `json:"is_in_billing_retry_period"`
+
+	IsRetryable bool `json:"is_retryable"`
 }
 
 func NewIAPResponseIOS6(rc string) *IAPResponseIOS6 {
@@ -28,15 +35,21 @@ func (r *IAPResponseIOS6) ToIOS7() *IAPResponseIOS7 {
 		Status:          r.Status,
 		Environment:     "",
 		LatestReceipt:   r.LatestReceipt,
+		IsRetryable:     r.IsRetryable,
 	}
 	ios7.Receipt = r.Receipt.ToIOS7()
 	if r.LatestReceiptInfo.TransactionID != "" {
 		ios7.LatestReceiptInfo = []InApp{r.LatestReceiptInfo.ToInApp()}
 	}
+	if r.LatestExpiredReceiptInfo.TransactionID != "" {
+		ios7.LatestReceiptInfo = []InApp{r.LatestExpiredReceiptInfo.ToInApp()}
+	}
 	if r.AutoRenewProductID != "" {
 		ios7.PendingRenewalInfo = []PendingRenewalInfo{{
 			AutoRenewProductID: r.AutoRenewProductID,
 			AutoRenewStatus:    strconv.Itoa(r.AutoRenewStatus),
+			ExpirationIntent:   r.ExpirationIntent,
+			RetryFlag:          r.RetryFlag,
 		}}
 	}
 	return ios7
@@ -60,6 +73,8 @@ type ReceiptIOS6 struct {
 	RequestDate
 	PurchaseDate
 	OriginalPurchaseDate
+	IsTrialPeriod        string `json:"is_trial_period"`
+	IsInIntroOfferPeriod string `json:"is_in_intro_offer_period"`
 }
 
 func (rc *ReceiptIOS6) ToIOS7() ReceiptIOS7 {
@@ -93,5 +108,7 @@ func (rc *ReceiptIOS6) ToInApp() InApp {
 			ExpiresDateMS:  rc.ExpiresDateMS,
 			ExpiresDatePST: rc.ExpiresDatePST,
 		},
+		IsTrialPeriod:        rc.IsTrialPeriod,
+		IsInIntroOfferPeriod: rc.IsInIntroOfferPeriod,
 	}
 }

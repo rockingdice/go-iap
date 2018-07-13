@@ -12,6 +12,7 @@ type IAPResponseIOS7 struct {
 	LatestReceiptInfo  []InApp              `json:"latest_receipt_info"`
 	LatestReceipt      string               `json:"latest_receipt"`
 	PendingRenewalInfo []PendingRenewalInfo `json:"pending_renewal_info"`
+	IsRetryable        bool                 `json:"is_retryable"`
 }
 
 func NewIAPResponseIOS7(rc string) *IAPResponseIOS7 {
@@ -63,6 +64,7 @@ type InApp struct {
 	TransactionID             string `json:"transaction_id"`
 	OriginalTransactionID     string `json:"original_transaction_id"`
 	IsTrialPeriod             string `json:"is_trial_period"`
+	IsInIntroOfferPeriod      string `json:"is_in_intro_offer_period"`
 	AppItemID                 string `json:"app_item_id"`
 	VersionExternalIdentifier string `json:"version_external_identifier"`
 	WebOrderLineItemID        string `json:"web_order_line_item_id"`
