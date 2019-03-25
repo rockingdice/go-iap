@@ -77,6 +77,18 @@ func (r *Receipt) HasExpired() bool {
 	return r.Status == 21006
 }
 
+// ShouldSendToTestEnvironment checks this receipt status is 21007
+// this receipt is from the test environment, but it was sent to the production environment for verification
+func (r *Receipt) ShouldSendToTestEnvironment() bool {
+	return r.Status == 21007
+}
+
+// ShouldSendToProductionEnvironment checks this receipt status is 21008
+// this receipt is from the production environment, but it was sent to the test environment for verification
+func (r *Receipt) ShouldSendToProductionEnvironment() bool {
+	return r.Status == 21008
+}
+
 // GetTransactionIDs returns all of transaction_id from `in_app`
 func (r *Receipt) GetTransactionIDs() []int64 {
 	return r.InApps.TransactionIDs()
