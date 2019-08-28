@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	SandboxURL    string = "https://sandbox.itunes.apple.com/verifyReceipt"
-	ProductionURL string = "https://buy.itunes.apple.com/verifyReceipt"
+	SandboxURL    string = "http://sandbox.itunes.apple.com/verifyReceipt"
+	ProductionURL string = "http://buy.itunes.apple.com/verifyReceipt"
 )
 
 // Config is a configuration to initialize client
