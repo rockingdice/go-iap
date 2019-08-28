@@ -8,11 +8,13 @@ import (
 	"net/http/httputil"
 	"time"
 
+	"crypto/tls"
 	"gopkg.in/h2non/gentleman-retry.v1"
 	"gopkg.in/h2non/gentleman.v1"
 	"gopkg.in/h2non/gentleman.v1/context"
 	"gopkg.in/h2non/gentleman.v1/plugin"
 	"gopkg.in/h2non/gentleman.v1/plugins/body"
+	gtls "gopkg.in/h2non/gentleman.v1/plugins/tls"
 	"gopkg.in/h2non/gentleman.v1/plugins/timeout"
 )
 
@@ -25,6 +27,9 @@ func post(url string, opt option) (*response, error) {
 func call(opt option) (*response, error) {
 	cli := gentleman.New()
 	cli.URL(opt.URL)
+
+	// Define a custom header
+	cli.Use(gtls.Config(&tls.Config{InsecureSkipVerify: true}))
 
 	req := cli.Request()
 	req.Method("POST")
